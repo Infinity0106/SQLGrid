@@ -52,18 +52,18 @@ bucket.initBucket().then(function () {
 
 ##### Parameters
 
-| key | default | type | description |
-| --- | --- | --- | --- |
-| connectionOptions | {}| Object | `connectionOptions` is passed directly to a [sequelize constructor](http://docs.sequelizejs.com/class/lib/sequelize.js~Sequelize.html#instance-constructor-constructor). If `connectionOptions` is an instance of [sequelize](http://docs.sequelizejs.com/) it will be used directly. |
-| bucketOptions | {} | Object |  Optional parameters listed below |
+| key               | default | type   | description                                                                                                                                                                                                                                                                           |
+| ----------------- | ------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| connectionOptions | {}      | Object | `connectionOptions` is passed directly to a [sequelize constructor](http://docs.sequelizejs.com/class/lib/sequelize.js~Sequelize.html#instance-constructor-constructor). If `connectionOptions` is an instance of [sequelize](http://docs.sequelizejs.com/) it will be used directly. |
+| bucketOptions     | {}      | Object | Optional parameters listed below                                                                                                                                                                                                                                                      |
 
 ###### Options
 
-| key | default | type | description |
-|---|---|---|---|
-| bucketName | `fs` | String | The name of the bucket. Table names are prefixed by this. |
-| concurrency | `10` | Number | When writing/reading a file, the number of concurrent queries in flight for a given stream. |
-| cacheSize | `100` | Number | The cache size in megabytes. Setting to `0` will disable caching. |
+| key         | default | type   | description                                                                                 |
+| ----------- | ------- | ------ | ------------------------------------------------------------------------------------------- |
+| bucketName  | `fs`    | String | The name of the bucket. Table names are prefixed by this.                                   |
+| concurrency | `10`    | Number | When writing/reading a file, the number of concurrent queries in flight for a given stream. |
+| cacheSize   | `100`   | Number | The cache size in megabytes. Setting to `0` will disable caching.                           |
 
 ##### returns
 
@@ -111,10 +111,10 @@ bucket.initBucket().then(function () {
 
 ###### Options
 
-| key | default | type | description |
-| --- | --- | --- | --- |
-| filename | *required* | String | The name of the file. |
-| buffer | *required* | Buffer | A buffer of file contents. |
+| key      | default    | type   | description                |
+| -------- | ---------- | ------ | -------------------------- |
+| filename | *required* | String | The name of the file.      |
+| buffer   | *required* | Buffer | A buffer of file contents. |
 
 ##### returns
 
@@ -138,9 +138,12 @@ let newFile = await bucket.writeFile({filename: '/videos/myVid.mp4', buffer: fil
 
 ###### Options
 
-| key | default | type | description |
-| --- | --- | --- | --- |
-| filename | *required* | String | The name of the file. |
+| key        | default    | type   | description                   |
+| ---------- | ---------- | ------ | ----------------------------- |
+| filename   | *required* | String | The name of the file.         |
+| modeler    | *required* | String | name of the model to link.    |
+| modeler_id | *required* | UUID   | id of the model to reference. |
+| mime       | *required* | String | mime type of the file.        |
 
 ##### returns
 
@@ -170,23 +173,23 @@ fs.createReadStream('./myVid.mp4').pipe(writeStream)
 
 ###### Options
 
-| key | default | type | description |
-| --- | --- | --- | --- |
-| id | Null | String | The `id` of the file to retrieve. |
-| filename | Null | String | Ignored if `id != null`. The `filename` of the file to retrieve |
-| revision | `-1` | Number | Ignored if `id != null`. The revision of the file to retrieve. If multiple files are uploaded under the same `filename` they are considered revisions. This may be a positive or negative number. (see chart below) Passing `'all'` will return an array of all revisions. |
+| key      | default | type   | description                                                                                                                                                                                                                                                                |
+| -------- | ------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id       | Null    | String | The `id` of the file to retrieve.                                                                                                                                                                                                                                          |
+| filename | Null    | String | Ignored if `id != null`. The `filename` of the file to retrieve                                                                                                                                                                                                            |
+| revision | `-1`    | Number | Ignored if `id != null`. The revision of the file to retrieve. If multiple files are uploaded under the same `filename` they are considered revisions. This may be a positive or negative number. (see chart below) Passing `'all'` will return an array of all revisions. |
 
 ###### How revision numbers work
 
 If there are five versions of a file, the below chart would be the revision numbers
 
-| Number | Description |
-| --- | --- |
-| `0` or `-5` | The original file |
-| `1` or `-4` | The first revision |
-| `2` or `-3` | The second revision |
+| Number                | Description                                                             |
+| --------------------------- | --------------------------------------------------------------------------------------- |
+| `0` or `-5` | The original file                                           |
+| `1` or `-4` | The first revision                                        |
+| `2` or `-3` | The second revision                                     |
 | `3` or `-2` | The second most recent revision |
-| `4` or `-1` | The most recent revision |
+| `4` or `-1` | The most recent revision                      |
 
 ##### Description
 
@@ -206,13 +209,13 @@ let file2 = bucket.getFile({filename: 'catVideo.mp4', revision: 2})
 
 ###### Options
 
-| key | default | type | description |
-| --- | --- | --- | --- |
-| id | Null | String | The `id` of the file to retrieve. |
-| filename | Null | String | Ignored if `id != null`. The `filename` of the file to retrieve |
-| revision | `-1` | Number/String | Ignored if `id != null`. The revision of the file to retrieve. If multiple files are uploaded under the same `filename` they are considered revisions. This may be a positive or negative number. (see chart below) Passing `'all'` will return an array of all revisions. |
-| seekStart | Null | Number | The start of the byte range. |
-| seekEnd | Null | Number | The end of the byte range. If omitted the stream will continue to the end of file. |
+| key       | default | type          | description                                                                                                                                                                                                                                                                |
+| --------- | ------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id        | Null    | String        | The `id` of the file to retrieve.                                                                                                                                                                                                                                          |
+| filename  | Null    | String        | Ignored if `id != null`. The `filename` of the file to retrieve                                                                                                                                                                                                            |
+| revision  | `-1`    | Number/String | Ignored if `id != null`. The revision of the file to retrieve. If multiple files are uploaded under the same `filename` they are considered revisions. This may be a positive or negative number. (see chart below) Passing `'all'` will return an array of all revisions. |
+| seekStart | Null    | Number        | The start of the byte range.                                                                                                                                                                                                                                               |
+| seekEnd   | Null    | Number        | The end of the byte range. If omitted the stream will continue to the end of file.                                                                                                                                                                                         |
 
 ###### How revision numbers work
 
@@ -244,11 +247,11 @@ let file2 = bucket.readFile({filename: 'catVideo.mp4', revision: 2})
 
 ###### Options
 
-| key | default | type | description |
-| --- | --- | --- | --- |
-| id | *required* | String | The `id` of the file to retrieve |
-| seekStart | Null | Number | The start of the byte range. |
-| seekEnd | Null | Number | The end of the byte range. If omitted the stream will continue to the end of file. |
+| key       | default    | type   | description                                                                        |
+| --------- | ---------- | ------ | ---------------------------------------------------------------------------------- |
+| id        | *required* | String | The `id` of the file to retrieve                                                   |
+| seekStart | Null       | Number | The start of the byte range.                                                       |
+| seekEnd   | Null       | Number | The end of the byte range. If omitted the stream will continue to the end of file. |
 
 ##### returns
 
@@ -272,9 +275,9 @@ readStream.pipe(fs.createWriteStream('./mySavedVideo.mp4'))
 
 ###### Options
 
-| key | default | type | description |
-| --- | --- | --- | --- |
-| id | *required* | String | The `id` of the file to delete |
+| key | default    | type   | description                    |
+| --- | ---------- | ------ | ------------------------------ |
+| id  | *required* | String | The `id` of the file to delete |
 
 ##### returns
 
@@ -296,10 +299,10 @@ let result = await sqlGrid.deleteFileById({id: 1})
 
 ###### Options
 
-| key | default | type | description |
-| --- | --- | --- | --- |
-| filename | Null | String | The `filename` of the file to delete |
-| revision | `all` | Number | The revision of the file to delete. If multiple files are uploaded under the same `filename` they are considered revisions. This may be a positive or negative number (see chart below). The default is to delete *all* revisions. |
+| key      | default | type   | description                                                                                                                                                                                                                        |
+| -------- | ------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| filename | Null    | String | The `filename` of the file to delete                                                                                                                                                                                               |
+| revision | `all`   | Number | The revision of the file to delete. If multiple files are uploaded under the same `filename` they are considered revisions. This may be a positive or negative number (see chart below). The default is to delete *all* revisions. |
 
 ###### How revision numbers work
 
