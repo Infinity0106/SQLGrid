@@ -30,7 +30,7 @@ Arthur Andrew Medical manufactures products with ingredients that have extensive
 Supports node v8.0+
 
 ```
-npm install --save @internalfx/sqlgrid
+npm install --save Infinity0106/SQLGrid
 ```
 
 ## TL;DR
