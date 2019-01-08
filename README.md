@@ -173,23 +173,26 @@ fs.createReadStream('./myVid.mp4').pipe(writeStream)
 
 ###### Options
 
-| key      | default | type   | description                                                                                                                                                                                                                                                                |
-| -------- | ------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id       | Null    | String | The `id` of the file to retrieve.                                                                                                                                                                                                                                          |
-| filename | Null    | String | Ignored if `id != null`. The `filename` of the file to retrieve                                                                                                                                                                                                            |
-| revision | `-1`    | Number | Ignored if `id != null`. The revision of the file to retrieve. If multiple files are uploaded under the same `filename` they are considered revisions. This may be a positive or negative number. (see chart below) Passing `'all'` will return an array of all revisions. |
+| key        | default | type   | description                                                                                                                                                                                                                                                                |
+| ---------- | ------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id         | Null    | String | The `id` of the file to retrieve.                                                                                                                                                                                                                                          |
+| filename   | Null    | String | Ignored if `id != null`. The `filename` of the file to retrieve                                                                                                                                                                                                            |
+| revision   | `-1`    | Number | Ignored if `id != null`. The revision of the file to retrieve. If multiple files are uploaded under the same `filename` they are considered revisions. This may be a positive or negative number. (see chart below) Passing `'all'` will return an array of all revisions. |
+| modeler    | null    | String | name of the realtional model that points to                                                                                                                                                                                                                                |
+| modeler_id | null    | String | a uuid identifier                                                                                                                                                                                                                                                          |
+
 
 ###### How revision numbers work
 
 If there are five versions of a file, the below chart would be the revision numbers
 
-| Number                | Description                                                             |
-| --------------------------- | --------------------------------------------------------------------------------------- |
-| `0` or `-5` | The original file                                           |
-| `1` or `-4` | The first revision                                        |
-| `2` or `-3` | The second revision                                     |
+| Number      | Description                     |
+| ----------- | ------------------------------- |
+| `0` or `-5` | The original file               |
+| `1` or `-4` | The first revision              |
+| `2` or `-3` | The second revision             |
 | `3` or `-2` | The second most recent revision |
-| `4` or `-1` | The most recent revision                      |
+| `4` or `-1` | The most recent revision        |
 
 ##### Description
 
@@ -221,13 +224,13 @@ let file2 = bucket.getFile({filename: 'catVideo.mp4', revision: 2})
 
 If there are five versions of a file, the below chart would be the revision numbers
 
-| Number | Description |
-| --- | --- |
-| `0` or `-5` | The original file |
-| `1` or `-4` | The first revision |
-| `2` or `-3` | The second revision |
+| Number      | Description                     |
+| ----------- | ------------------------------- |
+| `0` or `-5` | The original file               |
+| `1` or `-4` | The first revision              |
+| `2` or `-3` | The second revision             |
 | `3` or `-2` | The second most recent revision |
-| `4` or `-1` | The most recent revision |
+| `4` or `-1` | The most recent revision        |
 
 ##### Description
 
@@ -308,13 +311,13 @@ let result = await sqlGrid.deleteFileById({id: 1})
 
 If there are five versions of a file, the below chart would be the revision numbers
 
-| Number | Description |
-| --- | --- |
-| `0` or `-5` | The original file |
-| `1` or `-4` | The first revision |
-| `2` or `-3` | The second revision |
+| Number      | Description                     |
+| ----------- | ------------------------------- |
+| `0` or `-5` | The original file               |
+| `1` or `-4` | The first revision              |
+| `2` or `-3` | The second revision             |
 | `3` or `-2` | The second most recent revision |
-| `4` or `-1` | The most recent revision |
+| `4` or `-1` | The most recent revision        |
 
 ##### returns
 
